@@ -50,8 +50,10 @@ services:
     environment:
       POSTGRES_USER: "${POSTGRES_USER}"
       POSTGRES_PASSWORD: "${POSTGRES_PASSWORD}"
-      # POSTGRES_DB: "${POSTGRES_DB}"
-    image: "postgres:15.4-bookworm"
+      # ${POSTGRES_DB} には、.env で指定した "ec_interior" が入っている
+      POSTGRES_DB: "${POSTGRES_DB}"
+    # 開発環境に合わせるためにpostgreのver指定
+    image: "postgres:14.9-bookworm"
     profiles: ["postgres"]
     restart: "${DOCKER_RESTART_POLICY:-unless-stopped}"
     stop_grace_period: "3s"

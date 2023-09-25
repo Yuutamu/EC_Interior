@@ -1,10 +1,12 @@
 source "https://rubygems.org"
 git_source(:github) { |repo| "https://github.com/#{repo}.git" }
 
-ruby "3.2.2"
+# 開発環境を合わせるためにver指定
+ruby "3.1.2"
 
 # Bundle edge Rails instead: gem "rails", github: "rails/rails", branch: "main"
-gem "rails", "~> 7.0.8"
+# 開発環境を合わせるためにver指定
+gem "rails", "~> 7.0.4"
 
 # The original asset pipeline for Rails [https://github.com/rails/sprockets-rails]
 gem "sprockets-rails"
@@ -49,6 +51,11 @@ group :development, :test do
   # See https://guides.rubyonrails.org/debugging_rails_applications.html#debugging-with-the-debug-gem
   gem "debug", platforms: %i[ mri mingw x64_mingw ]
 
+  # コードの静的解析　rubocop
+  gem "rubocop", require: false
+  gem "rubocop-performance", require: false
+  gem "rubocop-rails", require: false
+
   # Reduces boot times through caching; required in config/boot.rb
   gem "bootsnap", require: false
 end
@@ -70,3 +77,8 @@ group :test do
   gem "selenium-webdriver"
   gem "webdrivers"
 end
+
+# 認証機能の実装
+gem "devise"
+# Stripeを使った決済処理の実装
+gem "stripe"
