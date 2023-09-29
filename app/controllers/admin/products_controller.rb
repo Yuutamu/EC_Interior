@@ -3,7 +3,7 @@ class Admin::ProductsController < ApplicationController
   before_action :set_product, only: %i[show edit update]
 
   def index
-    @productc = Product.all
+    @products = Product.all
   end
 
   def new
@@ -19,12 +19,9 @@ class Admin::ProductsController < ApplicationController
     end
   end
 
+  def show; end
 
-  def show;
-  end
-
-  def edit;
-  end
+  def edit; end
 
   def update
     if @product.update(product_params)
@@ -41,8 +38,7 @@ class Admin::ProductsController < ApplicationController
   end
 
   # ストロングパラメータ
-  set product_params
+  def product_params
     params.require(:product).permit(:name, :description, :price, :stock, :image)
   end
-
 end
