@@ -8,9 +8,14 @@ Rails.application.routes.draw do
   }
   root to: 'pages#home'
 
-  # products URL を admin配下に置くためのnamespace
+  # namespace (URL, ファイル構成 ともに指定のパスにする)
   namespace :admin do
     resources :products, only: %i[index show new create edit update]
+  end
+
+  # moudule (URLは変えずに、ファイル構成のみ指定のパスにする)
+  scope module: :customer do
+    resources :products, only: %i[index show]
   end
 
   get '/up/', to: 'up#index', as: :up
