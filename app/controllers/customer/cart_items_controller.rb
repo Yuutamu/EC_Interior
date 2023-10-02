@@ -1,6 +1,6 @@
 class Customer::CartItemsController < ApplicationController
   before_action :authenticate_customer!
-  before_action :set_cart_item, only %i[increase decrease destroy]
+  before_action :set_cart_item, only: %i[increase decrease destroy]
 
   def index
     @cart_items = current_customer.cart_items
@@ -12,7 +12,7 @@ class Customer::CartItemsController < ApplicationController
   end
 
   def increase
-    @cart_items.increment!(:quantity, 1)
+    @cart_item.increment!(:quantity, 1)
     redirect_to request.referer, notice: "Successfully updated your cart"
   end
 
