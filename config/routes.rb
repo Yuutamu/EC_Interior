@@ -16,6 +16,13 @@ Rails.application.routes.draw do
   # moudule (URLは変えずに、ファイル構成のみ指定のパスにする)
   scope module: :customer do
     resources :products, only: %i[index show]
+    resources :cart_items, only: %i[index create destroy] do
+      # cart内の個数を変更するためにpathにidを付与
+      member do
+        patch 'increase'
+        patch 'decrease'
+      end
+    end
   end
 
   get '/up/', to: 'up#index', as: :up
