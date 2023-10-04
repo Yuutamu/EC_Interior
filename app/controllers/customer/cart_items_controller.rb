@@ -9,22 +9,22 @@ class Customer::CartItemsController < ApplicationController
 
   def create
     increase_or_create(params[:cart_item][:product_id])
-    redirect_to cart_items_path, notice: "Successfully added product to your cart"
+    redirect_to cart_items_path, notice: 'Successfully added product to your cart'
   end
 
   def increase
     @cart_item.increment!(:quantity, 1)
-    redirect_to request.referer, notice: "Successfully updated your cart"
+    redirect_to request.referer, notice: 'Successfully updated your cart'
   end
 
   def decrease
     decrease_or_delete(@cart_item)
-    redirect_to request.referer, notice: "Successfully updated your cart"
+    redirect_to request.referer, notice: 'Successfully updated your cart'
   end
 
   def destroy
     @cart_item.destroy
-    redirect_to request.referer, notice: "Successfully deleted your cart"
+    redirect_to request.referer, notice: 'Successfully deleted your cart'
   end
 
   private
@@ -49,5 +49,4 @@ class Customer::CartItemsController < ApplicationController
       cart_item.destroy
     end
   end
-
 end
