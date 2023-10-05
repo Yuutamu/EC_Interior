@@ -7,5 +7,5 @@ class Order < ApplicationRecord
     out_for_delivery: 3,  # （配送中）
     delivered: 4,         # （配達済み）
   }
-  has_many: order_details, dependent: :destroy
+  has_many :order_details, dependent: :destroy
 end
