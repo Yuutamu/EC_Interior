@@ -7,7 +7,7 @@ class Customer::WebhooksController < ApplicationController
     endpoint_secret = Rails.application.credentials.dig(:stripe, :endpoint_secret)
     event = nil
 
-		# jsonを parseできなかったとき & Stripeの署名が無効のときに 400エラーを返す
+    # jsonを parseできなかったとき & Stripeの署名が無効のときに 400エラーを返す
     begin
       event = Stripe::Webhook.construct_event(
         payload, sig_header, endpoint_secret
@@ -26,22 +26,22 @@ class Customer::WebhooksController < ApplicationController
 
     case event.type
     when 'checkout.session.completed'
-			session = event.data.object # sessionの取得
-			customer = Customer.find(session.client_reference_id)
-			return unless customer # 顧客が存在するかどうか確認
-			
-			# トランザクション処理開始
-			ApplicationRecord.transaction do
-				order = create_order(session) # sessionを元にordersテーブルにデータを挿入
+      session = event.data.object # sessionの取得
+      customer = Customer.find(session.client_reference_id)
+      return unless customer # 顧客が存在するかどうか確認
+
+      # トランザクション処理開始
+      ApplicationRecord.transaction do
+        order = create_order(session) # sessionを元にordersテーブルにデータを挿入
         session_with_expand = Stripe::Checkout::Session.retrive({ id: session.id, expand: ['line_items'] })
         session_with_expand.line_items.data.each do |line_item|
           create_order_details(order, line_item) # 取り出したline_itemをorder_detailsテーブルに登録
         end
-			end
-			# トランザクション処理終了
+      end
+      # トランザクション処理終了
       customer.cart_items.destroy_all # customer のカート内の商品をすべて削除
-			redirect_to session.success_url
-		end
+      redirect_to session.success_url
+    end
   end
 
   private
@@ -49,17 +49,19 @@ class Customer::WebhooksController < ApplicationController
   # create! としているのは、レコードの保存に失敗した場合に例外を発生させる必要があるから.
   # 引数として受け取った sessionを元に各カラムに格納
   def create_order(session)
-    Order.create!({
-      customer_id: session.client_reference_id,
-      name: session.shipping.name,
-      postal_code: session.shipping.address.postal_code,
-      prefecture: session.shipping.address.state,
-      address1: session.shipping.address.line1,
-      address2: session.shipping.address.line2,
-      postage: session.shipping_options[0].shipping_amount,
-      billing_amount: session.amount_total,
-      status: 'confirm_payment'
-    })
+    Order.create!(
+      {
+        customer_id: session.client_reference_id,
+        name: session.shipping.name,
+        postal_code: session.shipping.address.postal_code,
+        prefecture: session.shipping.address.state,
+        address1: session.shipping.address.line1,
+        address2: session.shipping.address.line2,
+        postage: session.shipping_options[0].shipping_amount,
+        billing_amount: session.amount_total,
+        status: 'confirm_payment'
+      }
+    )
   end
 
   def create_order_details(order, line_item)
@@ -73,6 +75,6 @@ class Customer::WebhooksController < ApplicationController
                                                  quantity: line_item.quantity
                                                })
     # 購入された商品の在庫数の更新
-    purchased_product.update!(stock: (purchased_product.stock - order_detail.quantity)) 
+    purchased_product.update!(stock: (purchased_product.stock - order_detail.quantity))
   end
 end
