@@ -1,4 +1,4 @@
-# Stripe特有の記述なのでドキュメント参考
+# Stripe特有の記述があるのでドキュメント参考
 class Customer::CheckoutsController < ApplicationController
   before_action :authenticate_customer!
 
@@ -27,14 +27,15 @@ class Customer::CheckoutsController < ApplicationController
           shipping_rate_data: {
             type: 'fixed_amount',
             fixed_amount: {
-              amount: 500,
+              # 配送料金
+              amount: 3000,
               currency: 'jpy'
             },
             display_name: 'Single rate'
           }
         }
       ],
-      success_url: root_url,
+      success_url: "#{root_url}orders/success",
       cancel_url: "#{root_url}cart_items"
     )
   end
