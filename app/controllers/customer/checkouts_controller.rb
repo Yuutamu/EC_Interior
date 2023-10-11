@@ -27,15 +27,14 @@ class Customer::CheckoutsController < ApplicationController
           shipping_rate_data: {
             type: 'fixed_amount',
             fixed_amount: {
-              # 配送料金
               amount: 3000,
               currency: 'jpy'
             },
-            display_name: 'Single rate'
+            display_name: '全国一律'
           }
         }
       ],
-      success_url: "#{root_url}orders/success",
+      success_url: root_url,
       cancel_url: "#{root_url}cart_items"
     )
   end

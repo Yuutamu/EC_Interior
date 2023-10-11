@@ -33,7 +33,7 @@ class Customer::WebhooksController < ApplicationController
       # トランザクション処理開始
       ApplicationRecord.transaction do
         order = create_order(session) # sessionを元にordersテーブルにデータを挿入
-        session_with_expand = Stripe::Checkout::Session.retrive({ id: session.id, expand: ['line_items'] })
+        session_with_expand = Stripe::Checkout::Session.retrieve({ id: session.id, expand: ['line_items'] })
         session_with_expand.line_items.data.each do |line_item|
           create_order_details(order, line_item) # 取り出したline_itemをorder_detailsテーブルに登録
         end
@@ -50,19 +50,17 @@ class Customer::WebhooksController < ApplicationController
   # 引数として受け取った sessionを元に各カラムに格納
   # 開発メモ：shipping→shipping_detailsに変更
   def create_order(session)
-    Order.create!(
-      {
-        customer_id: session.client_reference_id,
-        name: session.shipping_details.name,
-        postal_code: session.shipping_details.address.postal_code,
-        prefecture: session.shipping_details.address.state,
-        address1: session.shipping_details.address.line1,
-        address2: session.shipping_details.address.line2,
-        postage: session.shipping_options[0].shipping_amount,
-        billing_amount: session.amount_total,
-        status: 'confirm_payment'
-      }
-    )
+    Order.create!({
+                    customer_id: session.client_reference_id,
+                    name: session.shipping_details.name,
+                    postal_code: session.shipping_details.address.postal_code,
+                    prefecture: session.shipping_details.address.state,
+                    address1: session.shipping_details.address.line1,
+                    address2: session.shipping_details.address.line2,
+                    postage: session.shipping_options[0].shipping_amount,
+                    billing_amount: session.amount_total,
+                    status: 'confirm_payment'
+                  })
   end
 
   def create_order_details(order, line_item)
