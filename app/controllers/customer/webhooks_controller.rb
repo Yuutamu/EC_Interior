@@ -33,7 +33,7 @@ class Customer::WebhooksController < ApplicationController
       # トランザクション処理開始
       ApplicationRecord.transaction do
         order = create_order(session) # sessionを元にordersテーブルにデータを挿入
-        session_with_expand = Stripe::Checkout::Session.retrive({ id: session.id, expand: ['line_items'] })
+        session_with_expand = Stripe::Checkout::Session.retrieve({ id: session.id, expand: ['line_items'] })
         session_with_expand.line_items.data.each do |line_item|
           create_order_details(order, line_item) # 取り出したline_itemをorder_detailsテーブルに登録
         end
