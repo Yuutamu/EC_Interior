@@ -48,15 +48,16 @@ class Customer::WebhooksController < ApplicationController
 
   # create! としているのは、レコードの保存に失敗した場合に例外を発生させる必要があるから.
   # 引数として受け取った sessionを元に各カラムに格納
+  # 開発メモ：shipping→shipping_detailsに変更
   def create_order(session)
     Order.create!(
       {
         customer_id: session.client_reference_id,
-        name: session.shipping.name,
-        postal_code: session.shipping.address.postal_code,
-        prefecture: session.shipping.address.state,
-        address1: session.shipping.address.line1,
-        address2: session.shipping.address.line2,
+        name: session.shipping_details.name,
+        postal_code: session.shipping_details.address.postal_code,
+        prefecture: session.shipping_details.address.state,
+        address1: session.shipping_details.address.line1,
+        address2: session.shipping_details.address.line2,
         postage: session.shipping_options[0].shipping_amount,
         billing_amount: session.amount_total,
         status: 'confirm_payment'
