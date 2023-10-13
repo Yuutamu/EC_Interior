@@ -10,7 +10,9 @@ Rails.application.routes.draw do
 
   # namespace (URL, ファイル構成 ともに指定のパスにする)
   namespace :admin do
+    root to: 'pages#home'
     resources :products, only: %i[index show new create edit update]
+    resources :orders, only: %i[show update]
   end
 
   # moudule (URLは変えずに、ファイル構成のみ指定のパスにする)
