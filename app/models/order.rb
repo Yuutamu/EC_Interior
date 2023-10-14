@@ -14,5 +14,5 @@ class Order < ApplicationRecord
   scope :shipped, -> { where(status: 'shipped') }
   scope :out_for_delivery, -> { where(status: 'out_for_delivery') }
   scope :delivered, -> { where(status: 'delivered') }
-  scope :created_today, -> { where('orders.created_at >= ?', Time.zone.now.biginning_of_day) }
+  scope :created_today, -> { where('orders.created_at >= ?', Time.zone.now.beginning_of_day) }
 end
