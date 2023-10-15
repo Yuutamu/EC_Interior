@@ -19,18 +19,19 @@ class Admin::PagesController < ApplicationController
     get_by_enum_value(params[:status])
   end
 
+  # case when　の使い方が特殊？？　第２引数を日本語にしてもウドいている。。？
   def get_by_enum_value(status)
     case status
     when 'waiting_payment'
-      [Order.latest.waiting_payment, '入金待ち']
+      [Order.latest.waiting_payment, 'waiting_payment'] # 入金待ち
     when 'confirm_payment'
-      [Order.latest.confirm_payment, '入金確認']
+      [Order.latest.confirm_payment, 'confirm_payment'] # 入金確認
     when 'shipped'
-      [Order.latest.shipped, '出荷済み']
+      [Order.latest.shipped, 'shipped'] # 出荷済み
     when 'out_for_delivery'
-      [Order.latest.out_for_delivery, '配送中']
+      [Order.latest.out_for_delivery, 'out_for_delivery'] # 配送中
     when 'delivered'
-      [Order.latest.delivered, '配送済み']
+      [Order.latest.delivered, 'delivered'] # 配送済み
     end
   end
 
