@@ -79,7 +79,7 @@ ActiveRecord::Schema[7.0].define(version: 2023_10_04_090054) do
   end
 
   create_table "order_details", force: :cascade do |t|
-    t.integer "price", null: false
+    t.integer "price", null: false # 注文時の金額
     t.integer "quantity", null: false
     t.bigint "order_id", null: false
     t.bigint "product_id", null: false
@@ -107,7 +107,7 @@ ActiveRecord::Schema[7.0].define(version: 2023_10_04_090054) do
   create_table "products", force: :cascade do |t|
     t.string "name", null: false
     t.text "description", null: false
-    t.integer "price", null: false
+    t.integer "price", null: false # フロントに反映される金額
     t.integer "stock", default: 0, null: false
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
