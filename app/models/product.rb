@@ -4,8 +4,9 @@ class Product < ApplicationRecord
     validates :description
     validates :price
     validates :stock
-    validates :image
+    validates :image # ActiveStrage
   end
+  # ActiveStorageを紐付けることで、Productテーブルから image カラムを呼び出せるようにする
   has_one_attached :image
   scope :price_high_to_low, -> { order(price: :desc) }
   scope :price_low_to_high, -> { order(price: :asc) }

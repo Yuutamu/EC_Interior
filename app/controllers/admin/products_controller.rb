@@ -37,7 +37,7 @@ class Admin::ProductsController < ApplicationController
     @product = Product.find(params[:id])
   end
 
-  # ストロングパラメータ
+  # ストロングパラメータ(関連付けたActiveStrageのimge も追加済み)
   def product_params
     params.require(:product).permit(:name, :description, :price, :stock, :image)
   end

@@ -14,6 +14,7 @@ ActiveRecord::Schema[7.0].define(version: 2023_10_04_090054) do
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
 
+  # Active Record と model（アップロードしたファイルデータ） を紐付ける中間テーブル
   create_table "active_storage_attachments", force: :cascade do |t|
     t.string "name", null: false
     t.string "record_type", null: false
@@ -24,6 +25,7 @@ ActiveRecord::Schema[7.0].define(version: 2023_10_04_090054) do
     t.index ["record_type", "record_id", "name", "blob_id"], name: "index_active_storage_attachments_uniqueness", unique: true
   end
 
+  # メタデータの管理、保存
   create_table "active_storage_blobs", force: :cascade do |t|
     t.string "key", null: false
     t.string "filename", null: false
@@ -36,6 +38,7 @@ ActiveRecord::Schema[7.0].define(version: 2023_10_04_090054) do
     t.index ["key"], name: "index_active_storage_blobs_on_key", unique: true
   end
 
+  # アップロードしたファイルのデータの variant に関する情報を保存
   create_table "active_storage_variant_records", force: :cascade do |t|
     t.bigint "blob_id", null: false
     t.string "variation_digest", null: false
