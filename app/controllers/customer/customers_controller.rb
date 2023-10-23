@@ -1,5 +1,12 @@
 class Customer::CustomersController < ApplicationController
-  def confirm_withdraw; end
-end
+  before_action :authenticate_customer!
 
-# TODO:退会機能の実装する
+  def confirm_withdraw; end
+
+  def withdraw
+    current_customer.update(status: 'withdrawn')
+    # セッション情報を削除した後に、ログアウトさせる
+    reset_session
+    redirect_to root_path, notice: 'Successfully withdraw from InteriorEC'
+  end
+end

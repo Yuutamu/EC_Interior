@@ -43,5 +43,7 @@
       <%= f.submit "Update Profile", class: "inline-flex w-full items-center justify-center rounded-md bg-indigo-500 p-3 text-white duration-100 ease-in-out hover:bg-indigo-600 focus:outline-none" %>
     </div>
   <% end %>
-  <%# TODO: 退会確認画面に遷移するリンクを設置%>
+</div>
+<div class="text-center font-bold text-red-500">
+  <%= link_to "Withdraw from InterioEC", confirm_withdraw_customers_path %>
 </div>

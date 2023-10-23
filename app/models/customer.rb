@@ -33,4 +33,10 @@ class Customer < ApplicationRecord
       }
     end
   end
+
+  # 退会済みアカウントのログインを拒否 (deviceで扱っているモデルのactive_for_authentication? を上書きする)
+  # https://rubydoc.info/github/plataformatec/devise/Devise/Models/Authenticatable
+  def active_for_authentication?
+    super && (status == 'normal')
+  end
 end
