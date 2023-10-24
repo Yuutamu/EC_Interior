@@ -45,7 +45,8 @@ gem "tzinfo-data", platforms: %i[ mingw mswin x64_mingw jruby ]
 # gem "image_processing", "~> 1.2"
 
 # Execute jobs in the background [https://github.com/mperham/sidekiq]
-gem "sidekiq", "~> 7.1"
+# sidekiq のver を変更 （"~> 7.1" → "~> 7.0"）
+gem "sidekiq", "~> 7.0"
 
 group :development, :test do
   # See https://guides.rubyonrails.org/debugging_rails_applications.html#debugging-with-the-debug-gem

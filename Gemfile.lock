@@ -292,7 +292,7 @@ DEPENDENCIES
   rubocop-performance
   rubocop-rails
   selenium-webdriver
-  sidekiq (~> 7.1)
+  sidekiq (~> 7.0)
   sprockets-rails
   stimulus-rails
   stripe
