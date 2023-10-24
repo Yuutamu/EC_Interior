@@ -40,6 +40,8 @@ class Customer::WebhooksController < ApplicationController
       end
       # トランザクション処理終了
       customer.cart_items.destroy_all # customer のカート内の商品をすべて削除
+      # Action Mailer メールを 非同期 で送信
+      OrderMailer.complete(email: session.customer_details.email).deliver_later
       redirect_to session.success_url
     end
   end
