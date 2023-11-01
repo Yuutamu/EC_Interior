@@ -1,7 +1,7 @@
-# 本サービスは、以下のdockerを利用して作成しております。
+# 以下のdockerを利用して作成。
 https://github.com/nickjj/docker-rails-example
 
-以下、dockerに関する説明
+以下、利用しているdockerに関する説明
 # An example Rails + Docker app
 
 ![CI](https://github.com/nickjj/docker-rails-example/workflows/CI/badge.svg?branch=main)
