@@ -4,7 +4,7 @@ class Customer::CartItemsController < ApplicationController
 
   def index
     @cart_items = current_customer.cart_items
-    @total = @cart_items.inject(0) { |sum, cart_item| sum + cart_item.line_total }
+    @total = @cart_items.inject(0) { |sum, cart_item| sum + cart_item.line_total } # inject メソッド
   end
 
   def create
@@ -38,7 +38,7 @@ class Customer::CartItemsController < ApplicationController
     if cart_item
       cart_item.increment!(:quantity, 1)
     else
-      current_customer.cart_items.build(product_id:).save
+      current_customer.cart_items.build(product_id:).save # buildの際はsaveも行う
     end
   end
 

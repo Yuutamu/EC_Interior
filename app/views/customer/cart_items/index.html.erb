@@ -59,6 +59,7 @@
                   </div>
                 </td>
                 <td class="p-3">
+                  <%# CartItemオブジェクト.line_totalを呼び出す %>
                   <span class="text-lg"><%= number_to_currency(cart_item.line_total, unit: "¥", strip_insignificant_zeros: true) %></span>
                 </td>
                 <td class="p-3">
