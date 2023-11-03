@@ -15,7 +15,7 @@ class Customer < ApplicationRecord
   has_many :cart_items, dependent: :destroy
   has_many :orders, dependent: :destroy
 
-  # StripeのCheckoutSessionを作成する際にカート内商品の情報を配列で返すメソッドが必要
+  # StripeのCheckoutセッションを作成する際にカート内商品の情報を配列で返すメソッドが必要 （参考：https://stripe.com/docs/payments/checkout/migrating-prices#server-side-code-for-inline-items）
   def line_items_checkout
     cart_items.map do |cart_item|
       {
