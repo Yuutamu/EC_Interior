@@ -4,7 +4,7 @@ class Admin::CustomersController < ApplicationController
 
   def index
     # 1+N problem (preload method)
-    @customers = Customer.preload(:orders).latest
+    @customers = Customer.preload(:orders).latest # 最新順(latest)
   end
 
   def show; end
