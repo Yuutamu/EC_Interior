@@ -1,3 +1,5 @@
+require 'sidekiq/web'
+
 Rails.application.routes.draw do
   devise_for :admins, controllers: {
     sessions: 'admin/sessions'
@@ -14,6 +16,10 @@ Rails.application.routes.draw do
     resources :products, only: %i[index show new create edit update]
     resources :orders, only: %i[show update]
     resources :customers, only: %i[index show update]
+    # sidekiq
+    authenticate :admin do
+      mount Sidekiq::Web => '/sidekiq'
+    end
   end
 
   # moudule (URLは変えずに、ファイル構成のみ指定のパスにする)
