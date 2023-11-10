@@ -30,10 +30,6 @@ https://github.com/nickjj/docker-rails-example
 ### メール送信機能
 - Action Mailer
 
-### Front-end
-
-<!-- - [esbuild](https://esbuild.github.io/) -->
-- [Hotwire Turbo](https://hotwired.dev/)
-- [StimulusJS](https://stimulus.hotwired.dev/)
-- [TailwindCSS](https://tailwindcss.com/)
+### アイコン
+- [Google icons](https://fonts.google.com/icons)
 - [Heroicons](https://heroicons.com/)
