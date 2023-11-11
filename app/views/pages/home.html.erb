@@ -1,4 +1,4 @@
-
+<%# TODO:background image のHEX比調整必要 %>
 <body bgcolor="#F1EEE7">
 	<div>
 		<img class="justyfy-center w-full object-contain"
@@ -6,16 +6,15 @@
       alt="Interior EC"
     />
 	</div>
+  <div class='flex justify-center mt-2'>
+    <div class='mt-3'>
+      <%= link_to products_path, class:'group inline-flex items-center justify-center overflow-hidden rounded-lg p-0.5 font-medium bg-gray-300 text-white hover:bg-[#acae98] focus:ring-gray-300 focus:ring-gray-300' do %>
+        <span class='rounded-md bg-[#8c8f70] px-5 py-2.5 transition-all duration-75 ease-in group-hover:bg-opacity-0'>
+          Find Products
+        </span>
+      <% end %>
+    </div>
+  </div>
 </body> 
 
-<div class='flex justify-center mt-2'>
-  <div class='mt-3'>
-    <%= link_to products_path, 
-    class:'group inline-flex items-center justify-center overflow-hidden rounded-lg p-0.5 font-medium bg-gray-300 text-white hover:bg-[#acae98] focus:ring-gray-300 focus:ring-gray-300' do %>
-      <span class='rounded-md bg-[#8c8f70] px-5 py-2.5 transition-all duration-75 ease-in group-hover:bg-opacity-0'>
-        Find Products
-      </span>
-    <% end %>
-  </div>
-</div>
 
