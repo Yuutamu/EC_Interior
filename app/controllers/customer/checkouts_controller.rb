@@ -35,7 +35,7 @@ class Customer::CheckoutsController < ApplicationController
           }
         }
       ],
-      success_url: root_url,
+      success_url: success_orders_url, # successページの設定
       cancel_url: "#{root_url}cart_items"
     )
   end
