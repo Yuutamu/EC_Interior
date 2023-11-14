@@ -17,7 +17,7 @@
   </div>
   <div class="flex flex-wrap justify-center">
     <% @products.each do |product| %>
-      <div class="px-4 py-6">
+      <div class="px-6 py-8">
         <div class="w-full max-w-sm bg-gray-100 shadow-md rounded-lg">
           <%= link_to product_path(product) do %>
             <%= image_tag product.image, class: "p-5 object-cover" %>
