@@ -19,7 +19,7 @@ https://github.com/nickjj/docker-rails-example
 - Redis
 
 ### 決済機能
-- [Stripe](https://stripe.com/docs?locale=ja-JP)
+- [Stripe](https://stripe.com/docs/api)
 
 ### コード 品質管理
 - Rubocop
