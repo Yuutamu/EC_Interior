@@ -2,8 +2,6 @@ require_relative 'boot'
 
 require 'rails/all'
 
-# Require the gems listed in Gemfile, including any gems
-# you've limited to :test, :development, or :production.
 Bundler.require(*Rails.groups)
 
 module Hello
@@ -35,11 +33,11 @@ module Hello
     origins.map! { |url| /#{url}/ }
     config.action_cable.allowed_request_origins = origins
 
-    # rails generate xxx の制御
+    # rails generate コマンド の制御
     config.generators do |g|
       g.assets false
       g.skip_routes true
-      g.test_framework false
+      g.test_framework false # 後からRSpecを導入予定
     end
 
     config.time_zone = 'Tokyo'

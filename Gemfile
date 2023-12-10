@@ -68,8 +68,9 @@ group :development do
   # パフォーマンス調査 [https://github.com/MiniProfiler/rack-mini-profiler]
   gem "rack-mini-profiler"
 
-  # Speed up commands on slow machines / big apps [https://github.com/rails/spring]
-  # gem "spring"
+  # RSpec, FactoryBot
+  gem "rspec-rails"
+  gem "factory_bot_rails"
 end
 
 group :test do
@@ -81,5 +82,6 @@ end
 
 # 認証機能の実装
 gem "devise"
+
 # Stripeを使った決済処理の実装
 gem "stripe"
