@@ -12,8 +12,7 @@ class Admin::PagesController < ApplicationController
 
   def get_orders(params)
     if !params[:status].present? || !Order.statuses.keys.to_a.include?(params[:status])
-      return [Order.eager_load(:customer).latest,
-              'all'] # Orders.status の値がnull or 所定のstatus 以外の場合は、 latest 順に取得
+      return [Order.eager_load(:customer).latest, 'all'] # Orders.status の値がnull or 所定のstatus 以外の場合は、 latest 順に取得
     end
 
     get_by_enum_value(params[:status])
