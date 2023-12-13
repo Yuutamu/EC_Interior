@@ -1,5 +1,6 @@
 require 'rails_helper'
 
+# TODO: FactoryBot使って、DRYにする
 RSpec.describe Admin, type: :model do
   describe 'device.gem のバリデーション検証' do
     it 'メールアドレス,パスワードがあれば有効であること' do
