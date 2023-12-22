@@ -60,6 +60,7 @@ services:
     volumes:
       - "postgres:/var/lib/postgresql/data"
 
+  # redis:7.0.5-bullseye Redis を立てるためのコンテナ
   redis:
     deploy:
       resources:
@@ -73,6 +74,7 @@ services:
     volumes:
       - "redis:/data"
 
+  # Rails のアプリケーションを実行するためのコンテナ
   web:
     <<: *default-app
     deploy:
@@ -90,6 +92,7 @@ services:
       - "${DOCKER_WEB_PORT_FORWARD:-127.0.0.1:8000}:${PORT:-8000}"
     profiles: ["web"]
 
+  # SideKiq を用いて非同期処理を実行するためのコンテナ
   worker:
     <<: *default-app
     command: "bundle exec sidekiq -C config/sidekiq.yml"
@@ -101,6 +104,8 @@ services:
           memory: "${DOCKER_WORKER_MEMORY:-0}"
     profiles: ["worker"]
 
+  # Action Cable サーバを構築するためのコンテナ
+  # MEMO：チャット機能いらないので、不要。
   cable:
     <<: *default-app
     command: "puma -p 28080 cable/config.ru"
@@ -114,10 +119,13 @@ services:
       - "${DOCKER_CABLE_PORT_FORWARD:-127.0.0.1:28080}:28080"
     profiles: ["cable"]
 
+  # JavaScript のビルド・変更の監視をしてくれるコンテナ
+  # ビルドツールとして esbuild
   js:
     <<: *default-assets
     command: "yarn build"
 
+  # CSS のビルド・変更の監視をしてくれるコンテナ
   css:
     <<: *default-assets
     command: "yarn build:css"
